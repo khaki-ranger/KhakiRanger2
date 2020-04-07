@@ -1,8 +1,556 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+/* reset */
+img {
+  vertical-align: bottom;
+  opacity: 1;
+  transition: opacity 1s;
 }
-
+img.hide {
+  opacity: 0;
+}
+p {
+  margin: 0;
+}
+ul,dl,dd {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
 a {
-  color: #00B7FF;
+  text-decoration: none;
+  color: inherit;
+}
+table {
+  border-spacing: 0;
+  width: 100%;
+}
+h1, h2 {
+  margin: 0;
+}
+html {
+  touch-action: manipulation;
+}
+@media (max-width: 768px) {
+input,
+select,
+textarea {
+  font-size: 17px;
+}
+}
+/* common */
+body {
+  font-family:-apple-system, BlinkMacSystemFont, "Helvetica Neue", "Segoe UI","Noto Sans Japanese","ヒラギノ角ゴ ProN W3", Meiryo, sans-serif;
+  font-size: 14px;
+  margin: 0;
+}
+.clearfix::after{
+  content: "";
+  display: block;
+  clear: both;
+}
+.fl-left {
+  float: left;
+}
+.fl-right {
+  float: right;
+}
+.responsive-img {
+  width: 100%;
+  height: auto;
+}
+@media (max-width: 576px) {
+.container {
+  padding: 0 1rem;
+}
+}
+@media (min-width: 576px) {
+.container {
+  margin: 0 auto;
+}
+}
+@media (min-width: 576px) and (max-width: 768px) {
+.container {
+  width: 476px;
+}
+}
+@media (min-width: 768px) and (max-width: 992px) {
+.container {
+  width: 668px;
+}
+}
+@media (min-width: 992px) and (max-width: 1200px) {
+.container {
+  width: 892px;
+}
+}
+@media (min-width: 1200px) {
+.container {
+  width: 1000px;
+}
+}
+/* ui-component */
+.ui-block {
+  margin-bottom: 1rem;
+}
+a.ui-component,
+div.ui-component {
+  display: block;
+  text-align: center;
+  border: solid 1px #ddd;
+}
+a.ui-component,
+div.ui-component,
+button.ui-component {
+  width: 100%;
+  box-sizing: border-box;
+  padding: .5em;
+  border-radius: 3px;
+}
+/* key-visual */
+.key-visual .title-box {
+  background-image: url(/images/background.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  color: red;
+}
+.key-visual h1 {
+  color: white;
+  text-shadow: 2px 2px 0 yellow;
+  -webkit-text-stroke: 1px black;
+  text-stroke: 1px black;
+}
+@media (max-width: 576px) {
+.key-visual h1 {
+  font-size: 1.25rem;
+}
+}
+@media (min-width: 576px) {
+.key-visual h1 {
+  font-size: 2rem;
+}
+}
+/* control-panel */
+.control-panel {
+  background-color: rgba(255, 255, 255, .9);
+}
+.control-panel>div {
+  padding: 0 1rem 1rem 1rem;
+  text-align: center;
+}
+.control-panel h2 {
+  padding-top: 1rem;
+  text-align: center;
+}
+.control-panel h3 {
+  margin-bottom: 1rem;
+}
+@media (max-width: 768px) {
+.key-visual {
+}
+.key-visual .title-box {
+  text-align: center;
+  padding: 6rem 0;
+}
+.control-panel {
+  border-bottom: solid 1px #ddd;
+}
+}
+@media (min-width: 768px) {
+.key-visual {
+  position: relative;
+  display: table;
+  width: 100%;
+  height: 500px;
+}
+.key-visual .title-box {
+  display: table-cell;
+  vertical-align: middle;
+  text-align: left;
+  padding-left: 2rem;
+}
+.control-panel {
+  position: absolute;
+  right: 2rem;
+  top: 50px;
+  width: 300px;
+  height: 400px;
+  border-radius: 4px;
+}
+}
+/* login */
+.login .twitter-login,
+.login .facebook-login {
+  position: relative;
+  color: white;
+}
+.login .twitter-login {
+  background-color: #1da1f2;
+  border: 1px solid #1da1f2;
+}
+.login .facebook-login {
+  background-color: #4267b2;
+  border: 1px solid #29487d;
+}
+.login .twitter-login:before,
+.login .facebook-login:before {
+  font-family: "Font Awesome 5 Brands";
+  font-size: 1.25rem;
+  position: absolute;
+  left: 12px;
+  height: 1.25rem;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+}
+.login .twitter-login:before {
+  content: '\f099';
+}
+.login .facebook-login:before {
+  content: '\f39e';
+}
+/* btn-start */
+.btn-start {
+  background-color: red;
+  border-color: red !important;
+  color: white;
+}
+.btn-start img {
+  width: 20px;
+  height: auto;
+  padding-right: 5px;
+}
+/* start */
+.start .btn-start {
+  position: relative;
+  padding-left: 2.5rem;
+  padding-right: 1rem;
+}
+.start .btn-start img {
+  display: block;
+  position: absolute;
+  left: .5rem;
+  top: 0;
+  bottom: 0;
+  margin: auto 0;
+}
+/* middle-head-component */
+.middle-head-component {
+  display: flex;
+  align-items: center;
+  line-height: 1;
+  margin-bottom: 1.5rem;
+}
+.middle-head-component span {
+  padding: .5rem;
+  font-size: 1rem;
+  font-weight: bold;
+}
+.middle-head-component:before, .middle-head-component:after {
+  content: "";
+  flex-grow: 1;
+  height: 1px;
+  background: #ccc;
+  display: block;
+}
+/* about */
+.about {
+  padding: 2rem 0 1rem 0;
+}
+.about h1 {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+.about .body {
+  margin-bottom: 1rem;
+}
+.about .body .ui-component {
+  background-color: white;
+  border: none;
+  color: #333;
+  margin-top: 1rem;
+}
+/* this-game */
+/* gtch */
+.gtch {
+  background-color: yellow;
+}
+/* game */
+.game {
+  margin: 0 auto;
+  position: relative;
+}
+.game canvas#field {
+  background-color: green;
+}
+.status .holder>div>span,
+.game .ranking table td.rank,
+.game .ranking table td.kill,
+.game .ranking table td.time {
+  font-family: "Courier New", Consolas, monospace;
+}
+@media (max-width: 768px) {
+.game {
+  width: 360px;
+}
+.game canvas#field {
+  width: 360px;
+  height: 360px;
+}
+}
+@media (min-width: 768px) {
+.game {
+  width: 720px;
+}
+.game canvas#field {
+  width: 720px;
+  height: 500px;
+}
+}
+/* controller */
+.controller {
+  margin-top: 10px;
+}
+.controller .holder {
+  display: table;
+  width: 360px;
+  margin: 0 auto;
+}
+.controller .holder>div {
+  display: table-cell;
+  vertical-align: middle;
+}
+.controller .direction {
+  text-align: left;
+}
+.controller .direction .holder {
+  display: table;
+  width: 100%;
+}
+.controller .direction .holder>div {
+  display: table-cell;
+  vertical-align: middle;
+}
+.controller .direction .btn {
+  padding: 0;
+  box-shadow: 1px 2px 2px 0px rgba(0, 0, 0, 0.3);
+  border-radius: 50%;
+  width: 47px;
+  height: 47px;
+}
+.controller .direction .btn i {
+  font-size: 48px;
+  color: #666;
+}
+.controller .direction .btn .fa-chevron-circle-down {
+  color: yellowgreen;
+}
+.controller .direction .btn .fa-chevron-circle-up {
+  color: blue;
+}
+.controller .direction .btn .fa-chevron-circle-left {
+  color: green;
+}
+.controller .direction .btn .fa-chevron-circle-right {
+  color: red;
+}
+.controller .button #btn-fire {
+  background-color: red;
+}
+.controller .button {
+  width: 36%;
+}
+.controller .button button,
+.controller .reset a {
+  box-shadow: 1px 2px 2px 0px rgba(0, 0, 0, 0.3);
+  display: block;
+  border: none;
+  background-color: #666;
+  color: white;
+  height: 44px;
+  border-radius: 22px;
+  line-height: 20px;
+}
+.controller .reset {
+  padding: 0 20px;
+  text-align: center;
+  font-weight: bold;
+}
+.controller .reset a {
+  width: 44px;
+  font-size: 24px;
+}
+.controller .button {
+  text-align: right;
+}
+.controller .button button {
+  width: 100%;
+}
+.controller .button button i {
+  font-size: 40px;
+}
+.controller .direction .holder .upanddown  #btn-up {
+  margin-bottom: 24px;
+}
+/* status */
+.status {
+  background-color: black;
+  margin: 0 auto;
+  color: white;
+  padding: 8px 0;
+}
+@media (max-width: 768px) {
+.status {
+  width: 360px;
+}
+}
+@media (min-width: 768px) {
+.status {
+  width: 720px;
+}
+}
+.status .holder {
+  display: table;
+  width: 100%;
+}
+.status .holder>div {
+  display: table-cell;
+  vertical-align: middle;
+}
+.status .holder>div:first-child {
+  padding-left: 10px;
+}
+.status .holder>div:last-child {
+  padding-right: 10px;
+  width: 20px;
+}
+.status .holder .thum {
+  width: 28px;
+}
+.status .holder .thum img {
+  width: 24px;
+  height: 24px;
+  border-radius: 30px;
+  border: solid 2px white;
+}
+.status .holder .username {
+  text-align: left;
+  padding-left: 10px;
+}
+.status .holder .kill,
+.status .holder .time {
+  text-align: right;
+  padding-right: 10px;
+}
+.status .holder>div>span {
+  padding-left: 5px;
+}
+.status .holder .time {
+  width: 80px;
+}
+.status .holder .kill {
+  width: 60px;
+}
+.status .holder .img-weapon {
+  width: 20px;
+}
+.status .holder .img-weapon,
+.status .holder .sum-weapon {
+  text-align: right;
+}
+/* ranking */
+.game .ranking {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  background-color: rgba(255, 255, 255, .4);
+  padding: 6px;
+  font-size: .7rem;
+}
+.game .ranking table td {
+  vertical-align: middle;
+}
+.game .ranking table td.rank,
+.game .ranking table td.name {
+  text-align: left;
+}
+.game .ranking table td.rank,
+.game .ranking table td.name,
+.game .ranking table td.kill,
+.game .ranking table td.time {
+  padding-right: 5px;
+}
+.game .ranking table td.kill,
+.game .ranking table td.time {
+  text-align: right;
+}
+.game .ranking table td:last-child {
+  padding: 0;
+}
+/* gameover */
+.gameover {
+  transition: all 1s;
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 320px;
+  margin: 0 auto;
+}
+@media (max-width: 768px) {
+.gameover {
+  height: 360px;
+}
+}
+@media (min-width: 768px) {
+.gameover {
+  height: 500px;
+}
+}
+.gameover.visible {
+  opacity: 1;
+}
+.gameover table {
+  width: 100%;
+  height: 100%;
+}
+.gameover table td {
+  text-align: center;
+}
+.gameover table .upper td {
+  vertical-align: bottom;
+}
+.gameover table .upper td {
+  font-size: 4rem;
+  color: white;
+  text-shadow: #000 2px 2px 0px, #000 -2px 2px 0px, #000 2px -2px 0px, #000 -2px -2px 0px;
+}
+.gameover table .bottom td {
+  vertical-align: top;
+  width: 50%;
+}
+.gameover table .bottom td:first-child {
+  padding-right: 5px;
+}
+.gameover table .bottom td:last-child {
+  padding-left: 5px;
+}
+.gameover table .bottom td a {
+  background-color: rgba(255, 255, 255, .5);
+}
+/* footer */
+footer {
+  background-color: black;
+  color: white;
+  padding: 2rem 0;
+}
+footer .fb-plugin {
+  text-align: right;
+}
+footer .copyright {
+  text-align: center;
+  line-height: 28px;
+}
+footer .copyright a i:before {
+  padding-right: .25rem;
 }

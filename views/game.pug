@@ -1,0 +1,54 @@
+extends layout
+                                
+block content
+  section.status
+   .holder
+     .thum
+       img(src=`${thumbUrl}`)
+     .username
+       p #{displayName}
+     .time
+       i.fas.fa-clock
+       span
+     .kill
+       i.fas.fa-user-alt-slash
+       span
+     .img-weapon
+       img(src="images/missile.png" width="20" height="20")
+     .sum-weapon &times;
+       span
+  section.game
+    .field
+      canvas#field
+    .ranking
+      table#ranking-table
+    .gameover
+      table
+        tr.upper
+          td(colspan="2") Game Over
+        tr.bottom
+          td
+            a.ui-component(href="/game") 再チャレンジ
+          td
+            a.ui-component(href="/") トップページに戻る
+    .controller
+      .holder
+        .direction
+          .holder
+            .left
+              .btn#btn-left
+                i.fas.fa-chevron-circle-left
+            .upanddown
+              .btn#btn-up
+                i.fas.fa-chevron-circle-up
+              .btn#btn-down
+                i.fas.fa-chevron-circle-down
+            .right
+              .btn#btn-right
+                i.fas.fa-chevron-circle-right
+        .reset
+          a.ui-component(href="/game") R
+        .button
+          button#btn-fire
+            i.fas.fa-caret-up
+  script#main(src="/javascripts/index/bundle.js", data-displayName=`${displayName}`, data-thumbUrl=`${thumbUrl}`, data-ipAddress=`${ipAddress}`)

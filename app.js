@@ -3,11 +3,41 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var helmet = require('helmet');
+var session = require('express-session');
+var passport = require('passport');
+var TwitterStrategy = require('passport-twitter').Strategy;
+
+require('dotenv').config();
+const TWITTER_CONSUMER_KEY = process.env.TWITTER_CONSUMER_KEY;
+const TWITTER_SECRET = process.env.TWITTER_SECRET;
+const TWITTER_CALLBACK_URL = process.env.TWITTER_CALLBACK_URL;
 
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+var gameRouter = require('./routes/game');
+
+passport.use(new TwitterStrategy({
+    consumerKey: TWITTER_CONSUMER_KEY ,
+    consumerSecret: TWITTER_SECRET,
+    callbackURL: TWITTER_CALLBACK_URL
+  },
+  function(token, tokenSecret, profile, cb) {
+    process.nextTick(function () {
+      return cb(null, profile);
+    });
+  })
+);
+
+passport.serializeUser(function(user, cb) {
+  cb(null, user);
+});
+
+passport.deserializeUser(function(obj, cb) {
+  cb(null, obj);
+});
 
 var app = express();
+app.use(helmet());
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -19,8 +49,33 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use(session({ secret: '30d4745d6144f343', resave: false, saveUninitialized: false }));
+app.use(passport.initialize());
+app.use(passport.session());
+
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/game', gameRouter);
+
+app.get('/login/twitter',
+  passport.authenticate('twitter')
+);
+
+app.get('/oauth_callback',
+  passport.authenticate('twitter', { failureRedirect: '/' }),
+  function(req, res) {
+    res.redirect('/');
+  }
+);
+
+app.get('/logout', function (req, res) {
+  req.logout();
+    res.redirect('/');
+});
+
+function ensureAuthenticated(req, res, next) {
+  if (req.isAuthenticated()) { return next(); }
+  res.redirect('/');
+}
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
